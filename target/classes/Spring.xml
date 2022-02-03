@@ -1,0 +1,23 @@
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "https://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans>
+    <bean id="controller" class="cigma.pfe.Controllers.ClientController" >
+        <property name="ClientService" ref="service"/>
+    </bean>
+    <bean id="service" class="cigma.pfe.services.ClientServiceImpl" >
+        <constructor-arg ref="dao"/>
+    </bean>
+    <bean id="dao"
+          class="cigma.pfe.Dao.ClientDaoImpl">
+    </bean>
+
+    <bean id="controllerF" class="cigma.pfe.Controllers.FactureController" >
+        <property name="factureService" ref="serviceF"/>
+    </bean>
+    <bean id="serviceF" class="cigma.pfe.services.FactureServicelmpl" >
+         <!-- <constructor-arg ref="dao"/> -->
+        <property name="factureDao" ref="daoF"/>
+    </bean>
+    <bean id="daoF"
+          class="cigma.pfe.Dao.FactureDaolmpl">
+    </bean>
+</beans>
