@@ -1,7 +1,6 @@
 package cigma.pfe.Dao;
 import cigma.pfe.Models.Client;
 
-
 import java.util.List;
 
 public interface ClientDao {

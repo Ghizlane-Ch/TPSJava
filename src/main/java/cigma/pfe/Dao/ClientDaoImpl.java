@@ -1,6 +1,5 @@
 package cigma.pfe.Dao;
 
-
 import cigma.pfe.Models.Client;
 
 import javax.persistence.EntityManager;
@@ -15,14 +14,7 @@ public class ClientDaoImpl implements ClientDao {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("unit_clients");
     EntityManager em = emf.createEntityManager();
 
-   /* private ClientDao dao;
-
-    public void setDao(ClientDao dao) {
-        this.dao = dao;
-    }*/
-
-    public ClientDaoImpl() {
-    }
+    public ClientDaoImpl() {}
 
     @Override
     public Client save(Client c) {
@@ -56,8 +48,8 @@ public class ClientDaoImpl implements ClientDao {
     }
 
     @Override
-    public List<Client> findALL() {
-        Query query = em.createQuery("select c from Client c");
+    public List findALL() {
+        Query query = em.createQuery("select c from TClients c",Client.class);
         return query.getResultList();
     }
 }

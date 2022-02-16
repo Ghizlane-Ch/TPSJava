@@ -13,6 +13,10 @@ public class FactureDaolmpl implements FactureDao {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("unit_clients");
     EntityManager em = emf.createEntityManager();
+
+    public FactureDaolmpl() {
+    }
+
     @Override
     public Facture save(Facture f) {
         em.getTransaction().begin();
@@ -43,14 +47,10 @@ public class FactureDaolmpl implements FactureDao {
         return em.find(Facture.class,idFacture);
     }
 
-    @Override
-    public List<Facture> findALL() {
-        return null;
-    }
 
     @Override
     public List<Facture> findAll() {
-        Query query = em.createQuery("select f from Facture f");
+        Query query = em.createQuery("select f from TFactures f",Facture.class);
         return query.getResultList();
     }
 }

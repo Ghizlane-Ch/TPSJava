@@ -36,5 +36,5 @@ public class FactureServicelmpl implements IFactureService{
     public Facture getById(long id) { return factureDao.findById(id);}
 
     @Override
-    public List<Facture> getAll() {return factureDao.findALL();}
+    public List<Facture> getAll() {return factureDao.findAll();}
 }

@@ -3,13 +3,18 @@ package cigma.pfe.Models;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @Entity(name = "TClients")
+@ToString
 public class Client {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -18,29 +23,32 @@ public class Client {
         return this.id;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
+    /**** Factures **/
+    @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "client")
+    private List<Facture> factures;
 
-    public Client(long id) {
-        this.id = id;
-    }
+    /***Promotions***/
+    @ManyToMany(cascade = {CascadeType.PERSIST})
+    @JoinTable(name="my_join_table_client_promotion",joinColumns = @JoinColumn(name = "client_fk", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "promotion_fk", referencedColumnName = "id"))
+    private List<Promotion> promotions;
 
-    public Client() {
-    }
+    /****Carte Fidelio **/
+    @OneToOne(cascade = {CascadeType.PERSIST},mappedBy = "client")
+    private CarteFidelio carteFidelio;
+
+    /** Adresse **/
+    @OneToOne(cascade = {CascadeType.PERSIST},mappedBy = "client")
+    private Adresse adresse;
+
+    public Client() {}
+
     public Client(String name) {
         this.name = name;
     }
 
     @Column
     private String name;
-    @Override
-    public String toString() {
-        return "Client{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
-    }
 
 }
 

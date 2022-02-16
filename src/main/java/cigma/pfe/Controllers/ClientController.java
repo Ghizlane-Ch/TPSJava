@@ -8,7 +8,7 @@ import java.util.List;
 public class ClientController {
 
         IClientService  clientService ;
-
+public ClientController(){}
     public void setClientService(IClientService clientService) {
         this.clientService = clientService;
     }
@@ -26,6 +26,7 @@ public class ClientController {
     public void deleteById(long id){
         clientService.deleteById(id);
     }
+
     public Client getById(long id){
         return clientService.getById(id);
     }
