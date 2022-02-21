@@ -5,11 +5,15 @@ import java.util.List;
 
 public interface IClientService {
 
-    Client save(Client c);
+    void save(Client c);
     Client update(Client c);
     void deleteById(long id);
 
     Client getById(long id);
 
     List<Client> getAll();
+
+    Client findById(long id);
+
+    List<Client> findAll();
 }

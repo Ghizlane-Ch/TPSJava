@@ -2,35 +2,48 @@ package cigma.pfe.Controllers;
 
 import cigma.pfe.Models.Client;
 import cigma.pfe.services.IClientService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+@Controller("ctrl1")
 public class ClientController {
 
-        IClientService  clientService ;
-public ClientController(){}
-    public void setClientService(IClientService clientService) {
+    @Autowired
+    private IClientService clientService;
+
+    public ClientController(){System.out.println("creation bean controller");}
+
+    public ClientController(IClientService clientService) {
+        System.out.println("Call ClientController with client Service param....");
         this.clientService = clientService;
     }
 
-    public Client save(Client c ){
-            System.out.println("ClientController level...");
-            return clientService.save(c);
-        }
-    public void update(Client c){
+    public void save(Client c) {
+        System.out.println("ClientController level...");
+        clientService.save(c);
+    }
+
+    public void update(Client c) {
+        System.out.println("ClientController level...");
         clientService.update(c);
     }
 
-    //public IClientService getClientService() {return clientService;}
-
-    public void deleteById(long id){
+    public void deleteById(long id) {
+        System.out.println("ClientController level...");
         clientService.deleteById(id);
     }
 
-    public Client getById(long id){
-        return clientService.getById(id);
+    public Client findById(long id) {
+        return clientService.findById(id);
     }
 
-    public List<Client> getAll(){return  clientService.getAll();}
+    private List<Client> clientsService = new ArrayList<>();
+
+    public List<Client> findAll() {
+        return ((IClientService) clientsService).findAll();
+    }
 
 }

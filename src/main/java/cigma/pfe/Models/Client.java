@@ -1,18 +1,13 @@
 package cigma.pfe.Models;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Getter
-@Setter
-@AllArgsConstructor
 @Entity(name = "TClients")
-@ToString
+@Data
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Client {
 
     @Id

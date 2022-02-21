@@ -1,55 +1,55 @@
 package cigma.pfe.Dao;
 
 import cigma.pfe.Models.Client;
+import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
-
+@Repository
 public class ClientDaoImpl implements ClientDao {
 
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("unit_clients");
-    EntityManager em = emf.createEntityManager();
+    @PersistenceContext
+    EntityManager em ;
 
-    public ClientDaoImpl() {}
+    public ClientDaoImpl() {System.out.println("creation bean dao");
+    }
 
     @Override
     public Client save(Client c) {
-        em.getTransaction().begin();
         em.persist(c);
-        em.getTransaction().commit();
         return null;
     }
 
     @Override
-    public Client update(Client newClt) {
-        em.getTransaction().begin();
-        Client currentClient = em.find(Client.class, newClt.getId());
-        currentClient.setName(newClt.getName());
+    public Client update(Client c) {
+        Client currentClient = em.find(Client.class, c.getId());
+        currentClient.setName(c.getName());
         em.persist(currentClient);
-        em.getTransaction().commit();
         return null;
     }
 
     @Override
-    public void deleteById(long idClient) {
-        em.getTransaction().begin();
-        Client clientInDataBase = em.find(Client.class, idClient);
+    public void deleteById(long id) {
+        Client clientInDataBase = em.find(Client.class, id);
         em.remove(clientInDataBase);
-        em.getTransaction().commit();
+
     }
 
     @Override
-    public Client findById(long idClient) {
-        return em.find(Client.class,idClient);
+    public Client findById(long id) {
+        return em.find(Client.class, id);
     }
 
     @Override
-    public List findALL() {
-        Query query = em.createQuery("select c from TClients c",Client.class);
-        return query.getResultList();
+    public List<Client> findAll() {
+        Query query = em.createQuery("SELECT u FROM unit_clients u", Client.class);
+        return (List<Client>) query.getResultList();
     }
+
+    private List<Client> clientDao = new ArrayList<>();
+
+
+
 }

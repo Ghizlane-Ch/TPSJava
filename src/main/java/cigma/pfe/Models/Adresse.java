@@ -23,9 +23,6 @@ public class Adresse {
     String ville;
     String pays;
 
-    public Adresse(String avenue) {
-        this.avenue=avenue;
-    }
 
     @OneToOne
     @JoinColumn(name = "client_id")

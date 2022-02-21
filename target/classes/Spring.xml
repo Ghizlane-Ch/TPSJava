@@ -1,25 +1,25 @@
-<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN"
-        "https://www.springframework.org/dtd/spring-beans-2.0.dtd">
-<beans>
-    <bean id="controller" class="cigma.pfe.Controllers.ClientController" >
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:tx="http://www.springframework.org/schema/tx"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-3.0.xsd
+http://www.springframework.org/schema/tx
+http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-        <constructor-arg ref="service"/>
-    </bean>
-    <bean id="service" class="cigma.pfe.services.ClientServiceImpl" >
-        <constructor-arg ref="dao"/>
-    </bean>
-    <bean id="dao"
-          class="cigma.pfe.Dao.ClientDaoImpl">
-    </bean>
+<tx:annotation-driven />
+<context:component-scan base-package="Dao" />
+<context:component-scan base-package="Services" />
+<context:component-scan base-package="Controllers" />
 
-    <bean id="controllerF" class="cigma.pfe.Controllers.FactureController" >
-        <property name="factureService" ref="serviceF"/>
-    </bean>
-    <bean id="serviceF" class="cigma.pfe.services.FactureServicelmpl" >
-         <!-- <constructor-arg ref="dao"/> -->
-        <property name="factureDao" ref="daoF"/>
-    </bean>
-    <bean id="daoF" class="cigma.pfe.Dao.FactureDaolmpl">
+<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+    <property name="persistenceUnitName" value="unit_clients" />
+</bean>
 
-    </bean>
-</beans>
+<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+    <property name="entityManagerFactory" ref="entityManagerFactory" />
+</bean>
+        </beans>

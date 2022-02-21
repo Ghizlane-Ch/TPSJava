@@ -7,10 +7,8 @@ public interface ClientDao {
 
         Client save(Client c);
         Client update(Client c);
-        void deleteById(long idClient);
-        Client findById(long idClient);
-
-
-        List<Client> findALL();
+        void deleteById(long id);
+        Client findById(long id);
+        List<Client> findAll();
 
 }

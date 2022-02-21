@@ -2,39 +2,45 @@ package cigma.pfe.services;
 
 import cigma.pfe.Dao.FactureDao;
 import cigma.pfe.Models.Facture;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
+@Service
+@Transactional
 public class FactureServicelmpl implements IFactureService{
 
-    FactureDao factureDao;
-    public FactureServicelmpl(FactureDao factureDao) {
-        this.factureDao = factureDao;
+    @Autowired
+    private FactureDao factureDao;
+
+    public void FactureServiceImpl() {
+        System.out.println("CallFactureServiceImpl ....");
     }
 
-    public FactureDao getFactureDao() {
-        return factureDao;
+    public void FactureServiceImpl(FactureDao factureRepository) {
+        System.out.println("Call FactureService with facture Dao param....");
+        this.factureDao = factureRepository;
     }
 
-    public void setFactureDao(FactureDao factureDao) {
-        this.factureDao = factureDao;
+    @Override
+    public Facture create(Facture f) {
+        return factureDao.create(f);
     }
 
-    public FactureServicelmpl(){}
     @Override
-    public Facture save(Facture f) {
-        System.out.println("Service Layer : FactureServicelmpl Level... ");
-        return factureDao.save(f);}
+    public Facture read(Facture f) {
+        return factureDao.read(f);
+    }
 
     @Override
-    public Facture update(Facture f) { return factureDao.update(f);}
+    public Facture update(Facture f) {
+        return factureDao.update(f);
+    }
 
     @Override
-    public void deleteById(long id){ factureDao.deleteById(id);}
+    public void delete(Facture f) {
+        factureDao.delete(f);
 
-    @Override
-    public Facture getById(long id) { return factureDao.findById(id);}
+    }
 
-    @Override
-    public List<Facture> getAll() {return factureDao.findAll();}
 }

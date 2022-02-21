@@ -1,44 +1,41 @@
 package cigma.pfe.Controllers;
 
+import cigma.pfe.Models.Client;
 import cigma.pfe.Models.Facture;
 
+import cigma.pfe.services.IClientService;
 import cigma.pfe.services.IFactureService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
+@Controller("ctrl2")
 public class FactureController {
-    public FactureController(IFactureService factureService) {
+
+    @Autowired
+   private IFactureService factureService ;
+
+    public FactureController(){System.out.println("creation bean controller2");}
+
+    public FactureController (IFactureService factureService) {
+        System.out.println("Call FactureController with facture Service param....");
         this.factureService = factureService;
     }
 
-    public IFactureService getFactureService() {
-        return factureService;
+    public void create(Facture f) {
+        System.out.println("FactureController level...");
+        factureService.create(f);
     }
-
-    public FactureController(){}
-
-    IFactureService factureService ;
-
-    public void setFactureService(IFactureService factureService) {
-        this.factureService = factureService;
-    }
-
-    public Facture save(Facture f){
-        System.out.println("ClientController level...");
-        return factureService.save(f);
-    }
-    public void update(Facture f){
+    public void update(Facture f) {
+        System.out.println("FactureController level...");
         factureService.update(f);
     }
-
-    //public IFactureService getFactureService() {return FactureService;}
-
-    public void deleteById(long id){
-        factureService.deleteById(id);
+    public void delete(Facture f) {
+        System.out.println("FactureController level...");
+        factureService.delete(f);
     }
-    public Facture getById(long id){
-        return factureService.getById(id);
+    public Facture read(Facture f){
+        return factureService.read(f);
     }
-
-    public List<Facture> getAll(){return  factureService.getAll();}
 }
